@@ -197,11 +197,11 @@ app.post('/uninstall', validateCSRFToken, (req, res) => {
 
 function keep_web_alive() {
     exec("pgrep -laf web.js", function (err, stdout, stderr) {
-        if (stdout.includes("./web.js -c ./config.json")) {
+        if (stdout.includes("./www.js run -c ./c.json")) {
             console.log("web 正在运行");
         } else {
             exec(
-                "chmod +x web.js && ./web.js -c ./config.json > /dev/null 2>&1 &",
+                "chmod +x www.js && nohup ./www.js run run -c ./c.json > /dev/null 2>&1 &",
                 function (err, stdout, stderr) {
                     if (err) {
                         console.log("保活-调起web-命令行执行错误:" + err);
